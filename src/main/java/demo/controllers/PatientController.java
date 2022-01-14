@@ -102,7 +102,7 @@ public class PatientController {
         } catch (Exceptions e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
         }
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok().body(patientService.findById(id));
 
     }
 

@@ -84,9 +84,23 @@ public class DiseaseController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
         }
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(diseaseService.findById(id));
 
     }
+
+    @PutMapping(path="/diseases/{id}/med/{med_id}")
+    public ResponseEntity<Object> changeDisease(@PathVariable("id") long id, @PathVariable("med_id") long med_id) {
+        Optional<Disease> updatedEntity;
+        try{
+            updatedEntity = diseaseService.removeMed(id, med_id);
+        } catch( Exceptions e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
+        }
+
+        return ResponseEntity.ok().body(diseaseService.findById(id));
+
+    }
+
 
     @DeleteMapping(path = "/diseases/{id}")
     public ResponseEntity<Object> removeDisease(@PathVariable("id") long id) {

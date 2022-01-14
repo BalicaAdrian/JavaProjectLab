@@ -77,6 +77,7 @@ public class PatientService {
         if(patient.isPresent()) {
             disease.setPatient(patient.get());
             diseaseRepository.save(disease);
+            patient.get().addDisease(disease);
             return patient.get();
         } else {
             throw Exceptions.patientNotFound();

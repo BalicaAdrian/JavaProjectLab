@@ -2,10 +2,7 @@ package demo.services;
 
 import demo.Exceptions.Exceptions;
 import demo.models.*;
-import demo.repository.AccountRepository;
-import demo.repository.AppointmentRepository;
-import demo.repository.DiseaseRepository;
-import demo.repository.PatientRepository;
+import demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +15,9 @@ public class DiseaseService {
 
     @Autowired
     private DiseaseRepository diseaseRepository;
+
+    @Autowired
+    private MedRepository medRepository;
 
     @Transactional
     public Disease saveDisease(Disease disease) {
@@ -48,6 +48,36 @@ public class DiseaseService {
             throw Exceptions.diseaseNotFound();
         }
     }
+    @Transactional
+    public Optional<Disease> removeMed(long id, long med_id) {
+
+        Optional<Disease> existingDisease = diseaseRepository.findById(id);
+        if(existingDisease.isEmpty()) {
+            throw Exceptions.diseaseNotFound();
+        }
+
+        Optional<Med> existingMed = medRepository.findById(id);
+        if(existingMed.isEmpty()) {
+            throw Exceptions.medNotFound();
+        }
+
+        boolean ok = false;
+        for(Med med: existingDisease.get().getMeds()){
+            if(med.getId() == med_id){
+                ok = true;
+            }
+        }
+
+        if(ok == false){
+            throw Exceptions.medNotInTreatment();
+        }
+
+        existingDisease.get().removeMed(existingMed.get());
+        existingDisease.get().setPrice(existingDisease.get().getPrice() - existingMed.get().getMedPrice() * existingMed.get().getQuantity());
+        diseaseRepository.save(existingDisease.get());
+        return existingDisease;
+    }
+
 
     @Transactional
     public void delete(Disease entity) {

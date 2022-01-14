@@ -72,7 +72,7 @@ public class MedController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
         }
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(medService.findById(id));
     }
 
     @DeleteMapping(path = "/meds/{id}")

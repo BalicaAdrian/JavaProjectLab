@@ -77,7 +77,7 @@ public class AppointmentService {
             throw Exceptions.appointmentNotFound();
         }
 
-        Optional<Doctor> doctor = doctorRepository.findById(id);
+        Optional<Doctor> doctor = doctorRepository.findById(doctor_id);
         if(doctor.isEmpty()) {
             throw Exceptions.doctorNotFound();
         }

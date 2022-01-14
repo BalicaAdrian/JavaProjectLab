@@ -79,7 +79,7 @@ public class AppointmentController {
         }catch( Exceptions e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
         }
-            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(appointmentService.findById(id));
 
     }
 

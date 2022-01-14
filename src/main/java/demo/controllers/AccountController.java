@@ -65,7 +65,7 @@ public class AccountController {
         } catch (Exceptions e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
         }
-            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(accountService.findById(id));
 
     }
 
