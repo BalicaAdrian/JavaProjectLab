@@ -36,6 +36,22 @@ public class AppointmentController {
         }
     }
 
+    @GetMapping(path = "/appointments/patient/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getAppointmentsForPatient(@PathVariable("id") long id) {
+
+        try{
+            List<Appointment> appointments = (List<Appointment>) appointmentService.findAllAppointmentForPatient(id);
+            if (!appointments.isEmpty()) {
+                return ResponseEntity.ok(appointments);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No appointments");
+            }
+        } catch (Exceptions e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getError());
+        }
+
+    }
+
     @GetMapping(value = "/appointments/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAppointment(@PathVariable("id") long id) {
         Appointment appointment;

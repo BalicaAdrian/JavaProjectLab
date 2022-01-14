@@ -20,6 +20,6 @@ Cas si utilizator al aplicatiiei poti:
 - se pot face plati din contrul unui pacient catre contul unui doctor, si se poate face undo la o anumite plata banii fiind returnati intre cei doi (se poate face o singura data)
 - -medicamentele sunt cautate dupa nume si cantitate (nu se poate adauga un nou medicament cu acelas nume si cantitate ca s anu avem date redundante)
 - Se pot elimina medicamente din tratament (fiind automat recaulcuat costul)
-
+- Se pot vizualiza toate programarile unui pacient
 
 

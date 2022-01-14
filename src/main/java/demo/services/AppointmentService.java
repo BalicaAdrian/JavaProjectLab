@@ -26,6 +26,9 @@ public class AppointmentService {
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Autowired
+    private PatientRepository patientRepository;
+
     @Transactional
     public Appointment saveAppointment(Appointment appointment) {
         return appointmentRepository.save(appointment);
@@ -34,6 +37,17 @@ public class AppointmentService {
     public List<Appointment> findAll(){
         return appointmentRepository.findAll();
     }
+
+    public List<Appointment> findAllAppointmentForPatient(long patient_id){
+        Optional<Patient> patient = patientRepository.findById(patient_id);
+
+        if(patient.isEmpty()) {
+            throw Exceptions.patientNotFound();
+        }
+
+        return appointmentRepository.getAppointments(patient_id);
+    }
+
 
     public Appointment findById(Long id) {
         Optional<Appointment> appointment = appointmentRepository.findById(id);
