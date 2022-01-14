@@ -6,6 +6,7 @@ Proiectul consta in 8 tabele (cu tot cu ce de legatura). Acestea sunt Patient, D
 Logica dintre tabele este urmatoarea, Pacientul poate avea mai multe Disease iar diseaseul poate avea mai multe medicamente, care la randul sau pot face parte din mai multe diseases. De asemenea pacientul poate avea un cont, poate crea o programare, la care i se va adauga ulterior un doctor.
 Se pot face payment-uri intre un doctor si pacient fiind modificate valorile din contrurile lor bazate pe plati.
 
+Patien 1:1 account, Patient 1:M Appointment, Patient 1:M Disease, Disease M:m Meds, Account 1:1 Doctor, Payment 1:1 Account (in payment avem 2 accounts)
 Cas si utilizator al aplicatiiei poti:
 
 
